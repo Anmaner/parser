@@ -20,10 +20,10 @@ class Job
     #[ORM\Column(length: 255)]
     private string $title;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $salary = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $company = null;
 
     #[ORM\Column(length: 5000)]
