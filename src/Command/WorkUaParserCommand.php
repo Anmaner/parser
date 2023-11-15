@@ -17,7 +17,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'parse:work-ua',
-    description: 'Create new product',
+    description: 'Run work-ua parser',
 )]
 class WorkUaParserCommand extends Command
 {

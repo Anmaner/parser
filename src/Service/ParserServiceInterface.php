@@ -6,5 +6,7 @@ namespace App\Service;
 
 interface ParserServiceInterface
 {
+    public function getName(): string;
+
     public function handle(): void;
 }

@@ -15,6 +15,7 @@ use PHPHtmlParser\Exceptions\StrictException;
 
 class WorkUaParserService implements ParserServiceInterface
 {
+    private const PARSER_NAME = 'work_ua';
     public const MAX_PAGE = 3;
 
     private WorkUaParsingHandler $workUaParser;
@@ -22,13 +23,18 @@ class WorkUaParserService implements ParserServiceInterface
     private EntityManagerInterface $entityManager;
 
     public function __construct(
-        WorkUaParsingHandler   $workUaParser,
-        JobRepository          $jobRepository,
+        WorkUaParsingHandler $workUaParser,
+        JobRepository $jobRepository,
         EntityManagerInterface $entityManager
     ) {
         $this->workUaParser = $workUaParser;
         $this->jobRepository = $jobRepository;
         $this->entityManager = $entityManager;
+    }
+
+    public function getName(): string
+    {
+        return self::PARSER_NAME;
     }
 
     /**
