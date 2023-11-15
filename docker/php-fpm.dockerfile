@@ -44,16 +44,8 @@ RUN docker-php-ext-install shmop
 RUN docker-php-ext-enable shmop
 
 RUN apt-get update && apt-get install -y libpq-dev
-#RUN docker-php-ext-install pdo
 RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pgsql
-#RUN docker-php-ext-enable
-#RUN ln -s /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
-#RUN sed -i -e 's/;extension=pgsql/extension=pgsql/' /usr/local/etc/php/php.ini
-#RUN sed -i -e 's/;extension=pdo_pgsql/extension=pdo_pgsql/' /usr/local/etc/php/php.ini
-
-#RUN docker-php-ext-install pdo pdo_pgsql pgsql
-#RUN ln -s /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
 RUN apt-get update \
     && apt-get install -y \
@@ -68,5 +60,19 @@ RUN mkdir /var/php/log
 EXPOSE 9003
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --quiet
+
+
+# Add crontab file in the cron directory
+ADD ./cron/crontab /etc/cron.d/parser-cron
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/parser-cron
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
+#Install Cron
+RUN apt-get update
+RUN apt-get -y install cron
+# Run the command on container startup
+CMD cron && tail -f /var/log/cron.log
+
 
 WORKDIR /app
