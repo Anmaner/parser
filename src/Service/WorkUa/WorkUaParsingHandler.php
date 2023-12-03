@@ -97,7 +97,7 @@ class WorkUaParsingHandler
             $companyElement = $companyElement[0];
             $jobDto->setCompany($companyElement->text);
         }
-        $salaryElement = $dom->find('.card .text-indent b');
+        $salaryElement = $dom->find('.card .text-indent b.text-default');
         if (isset($salaryElement[0])) {
             $salaryElement = $salaryElement[0];
             $salaryDirt = $salaryElement->text;
