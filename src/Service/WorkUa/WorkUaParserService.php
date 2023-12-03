@@ -60,6 +60,7 @@ class WorkUaParserService implements ParserServiceInterface
             $job->setCompany($jobDto->getCompany());
             $job->setSalary($jobDto->getSalary());
             $job->setText($jobDto->getText());
+            $job->setCreatedAt(new \DateTimeImmutable());
 
             $this->entityManager->persist($job);
         }

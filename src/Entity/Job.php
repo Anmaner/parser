@@ -29,6 +29,13 @@ class Job
     #[ORM\Column(length: 5000)]
     private string $text;
 
+    #[ORM\Column(
+        type: 'datetime_immutable',
+        nullable: false,
+        options: ['default' => 'CURRENT_TIMESTAMP'],
+    )]
+    private \DateTimeImmutable $createdAt;
+
     public function getId(): int
     {
         return $this->id;
@@ -87,5 +94,15 @@ class Job
     public function setText(string $text): void
     {
         $this->text = $text;
+    }
+
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 }
